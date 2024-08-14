@@ -1,0 +1,16 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "62e6df36-3ebc-11ef-8bb4-672ccf68d658",
+  "appTemplate": {
+    "pageCodeFolders": {
+      "object": {
+        "tabList": {
+          "array": []
+        }
+      }
+    },
+    "version": "3.69.0",
+    "experimentalDataTabEnabled": true
+  }
+}
