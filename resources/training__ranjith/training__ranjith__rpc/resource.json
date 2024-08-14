@@ -1,0 +1,17 @@
+{
+  "type": "retoolSdk",
+  "host": null,
+  "port": null,
+  "databaseName": null,
+  "databaseUsername": null,
+  "databasePassword": null,
+  "description": "A training exercise in rpc",
+  "outboundRegion": null,
+  "ssl": null,
+  "editPrivilege": null,
+  "options": { "requireExplicitVersion": false },
+  "environment": "production",
+  "dynamicallyQueryable": false,
+  "uuid": "11d27c41-b6be-47f1-aabf-6377c8e4cbee",
+  "toolscriptVersion": "1.0.0"
+}
