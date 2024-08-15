@@ -1,0 +1,10 @@
+name: Delete Neon Branch with GitHub Actions Demo
+run-name: Delete a Neon Branch 🚀
+on: [push]
+jobs:
+  delete-neon-branch:
+    uses: neondatabase/delete-branch-action@v3
+    with:
+      project_id: rapid-haze-373089
+      branch: br-long-forest-224191
+      api_key: ${{ secrets.NEON_API_KEY }}
