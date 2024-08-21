@@ -1,0 +1,47 @@
+name: Check Auto-Created Branches
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  check-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for auto-created branches
+        id: check_branches
+        run: |
+          auto_branches=$(git branch -r | grep -E '.*/(protect|unprotect)-.*' | wc -l)
+          if [ $auto_branches -gt 0 ]; then
+            echo "Auto-created branches still exist. Please delete them before merging."
+            echo "::set-output name=branches_exist::true"
+            exit 1
+          else
+            echo "No auto-created branches found. Proceeding with merge."
+            echo "::set-output name=branches_exist::false"
+          fi
+
+      - name: Update PR status
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'Auto-created branches check',
+              head_sha: context.payload.pull_request.head.sha,
+              status: 'completed',
+              conclusion: 'failure',
+              output: {
+                title: 'Auto-created branches still exist',
+                summary: 'Please delete all auto-created branches before merging this Pull Request.'
+              }
+            })
+
