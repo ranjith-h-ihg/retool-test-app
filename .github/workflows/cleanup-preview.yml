@@ -5,6 +5,6 @@ jobs:
   delete-neon-branch:
     uses: neondatabase/delete-branch-action@v3
     with:
-      project_id: rapid-haze-373089
-      branch: br-long-forest-224191
+      project_id: morning-mouse-63689729
+      branch: br-ancient-sun-a2fayqwq
       api_key: ${{ secrets.NEON_API_KEY }}
