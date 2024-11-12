@@ -1,0 +1,27 @@
+name: Create Neon Branch with GitHub Actions Demo
+run-name: Create a Neon Branch 🚀
+on: [pull_request]
+jobs:
+  Create-Neon-Branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Get current branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v8
+      - name: Create Neon Branch
+        id: create-branch
+        uses: neondatabase/create-branch-action@v5
+        with:
+          project_id: ${{ env.NEON_PROJECT_ID }}
+          # optional (defaults to your project's default branch)
+          parent: br-ancient-sun-a2fayqwq
+          # optional (defaults to neondb)
+          database: retool-test-app
+          username: retool-test-app_owner
+          api_key: ${{ secrets.NEON_API_KEY }}
+          branch_name: preview/${{ steps.branch-name.outputs.current_branch }}
+      - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
+      - run: echo host ${{ steps.create-branch.outputs.host }}
+      - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
